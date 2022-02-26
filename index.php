@@ -15,6 +15,7 @@ function respuesta(int $status, $id = null, string $msg = null, string $id_doc =
     $statusText[201] = 'Created';
     $statusText[202] = 'Accepted';
     $statusText[204] = 'No Content';
+    $statusText[205] = 'Reset Content';
     $statusText[400] = 'Bad Request';
     $statusText[404] = 'Not Found';
     $statusText[405] = 'Method Not Allowed';
@@ -56,6 +57,11 @@ switch($_SERVER['REQUEST_METHOD']){
 
     case 'PUT':
         if( $_GET['id'] ){ modificar_hoja($_GET['id']); }
+        else{ respuesta(400, null, 'Falta ID.'); }
+    break;
+
+    case 'DELETE':
+        if( $_GET['id'] ){ borrar_hoja($_GET['id']); }
         else{ respuesta(400, null, 'Falta ID.'); }
     break;
 
@@ -122,5 +128,17 @@ function modificar_hoja($id){
         respuesta(202, $id);
     }else{
         respuesta(500, $id, '('.$bd->lastErrorCode().') '.$bd->lastErrorMsg() );
+    }
+}
+
+function borrar_hoja($id){
+    $bd = new SQLite3(NOMBRE_BD);
+    $sql = "DELETE FROM carpeta  WHERE id = '$id';";
+    @$result = $bd->exec($sql);
+    
+    if( $bd->changes() ){
+        respuesta(205, $id);
+    }else{
+        respuesta(404, $id, 'No se borró ninguna hoja' );
     }
 }
