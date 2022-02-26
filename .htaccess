@@ -1,0 +1,7 @@
+## Editado por HFBK ##
+php_value display_errors On
+php_value date.timezone America/Cordoba
+
+# Redireccionamiento
+RewriteEngine On
+RewriteRule ^([a-z0-9\-]+)?\/?$ index.php?id=$1 [QSA] [NE] [NC]
