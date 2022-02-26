@@ -1,6 +1,6 @@
 <?php
 //echo '<pre>'; var_dump($_GET);
-if($_GET['id'] === 'server'){ echo '<pre>'; var_dump($_SERVER); exit; }
+//if($_GET['id'] === 'server'){ echo '<pre>'; var_dump($_SERVER); exit; }
 
 define('NOMBRE_BD', 'bd.sqlite');
 define('RUTA_DOC', $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].'/doc.html');
