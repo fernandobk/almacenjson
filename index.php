@@ -10,7 +10,7 @@ header('Allow: OPTIONS, HEAD, GET, POST');
 header('Content-type: application/json');
 header('Access-Control-Allow-Origin: '.($_SERVER['HTTP_ORIGIN']??'*'));
 header('Access-Control-Allow-Methods: OPTIONS, HEAD, GET, POST');
-header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Access-Control-Request-Method');
+header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Access-Control-Request-Method, Authorization');
 
 $_GET['id'] = trim(strtolower($_GET['id']));
 if( preg_match('/[^a-z0-9]/',$_GET['id']) ){ bad_request(); }
